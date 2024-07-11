@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "119490786267",
+    "project_id": "coursatechapp",
+    "storage_bucket": "coursatechapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119490786267:android:d99a966d5ed5a3623a2dfe",
+        "android_client_info": {
+          "package_name": "com.example.corsatech_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSi6dn3oKp6yz5VsC-lVGls421NPqNK7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
