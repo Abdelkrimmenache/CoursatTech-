@@ -7,9 +7,9 @@ import 'package:corsatech_app/helper/localStorgeData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class authViewModel extends GetxController {
+class AuthViewModel extends GetxController {
 
-    LocalStorgageData localStorageData = Get.put(LocalStorgageData()) ;
+   LocalStorgageData localStorageData = Get.put (LocalStorgageData()); 
 
   String? email , password  , name  ;  
    get user => _user.value?.email   ; 
@@ -22,12 +22,14 @@ class authViewModel extends GetxController {
 
 
    void onInit() {
+    
      print(_firebaseAuth.currentUser) ; 
-     if (_firebaseAuth.currentUser != null) {
-      getCurrentUserData(_firebaseAuth.currentUser!.uid) ; 
-     }
+    if(_firebaseAuth.currentUser != null ) {
+    getCurrentUserData(_firebaseAuth.currentUser!.uid) ; 
+    }
      _user.bindStream(_firebaseAuth.userChanges()) ; 
     super.onInit() ;
+
     
   }
 
@@ -39,8 +41,9 @@ class authViewModel extends GetxController {
   final credential = await _firebaseAuth.signInWithEmailAndPassword(
     email: email!,
     password: password! 
-  ).then((value) {
-    // getCurrentUserData(value.user!.uid) ; 
+  ).then((value)  {
+    getCurrentUserData(value.user!.uid) ; 
+    
   });
    _isLoading = false ;  
    update() ; 
@@ -78,11 +81,11 @@ class authViewModel extends GetxController {
     password: password!,
 
   ).then((value) async {
-  await saveUser(value) ;     
+  saveUser(value) ; 
   } ) ;
   _isLoading = false ;  
    update() ; 
-  // _firebaseAuth.currentUser!.sendEmailVerification() ; 
+  _firebaseAuth.currentUser!.sendEmailVerification() ; 
    await FirebaseAuth.instance.signOut(); 
   Get.snackbar("رسالة تحقق", "تم ارسال رسالة تحقق من البريد على بريدك الالكتورني" , duration: Duration(seconds: 4) ) ;
   Get.to(() => loginScreen()) ; 
@@ -109,33 +112,29 @@ class authViewModel extends GetxController {
 
   }
 
-
-  saveUser (UserCredential value) {
-    UserModel userModel = UserModel(
-      email: value.user!.email,
-      userId: value.user!.uid , 
-      name: name ,    
+  saveUser (UserCredential value  ) {
+        UserModel userModel = UserModel(
+      email: value.user!.email ,
+      userId: value.user!.uid ,  
+      name: name , 
     ) ; 
-    FirestoreUser().addUserToFirestore(userModel) ; 
-    setuser(userModel) ; 
-
+   FirestoreUser().addUserToFirestore(userModel) ; 
+   setUser(userModel) ; 
   }
 
-  setuser (UserModel userModel) async {
-   await localStorageData.setUserData(userModel) ;
+  setUser (UserModel userModel) {
+    localStorageData.setUser(userModel) ;
   }
 
-
-    void getCurrentUserData(String uid) async {
-      await FirestoreUser().getCurrentUser(uid).then((value) {
-        if (value.exists && value.data() != null) {
-          setuser(UserModel.fromJson(value.data() as Map<String, dynamic>));
-        } else {
-          // Handle the case when data is null or the document doesn't exist
-          print("User data is null or document does not exist");
-        }
-      });
+  getCurrentUserData (String uId) async {
+  await  FirestoreUser().getCurrentUser(uId).then((value) {
+      setUser(UserModel.fromJson(value.data() as Map )) ; 
     }
+    
+    ); 
+    
+  }
+
 
 
 

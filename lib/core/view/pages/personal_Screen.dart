@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class personalScreen extends StatelessWidget {
    personalScreen({super.key});
-  var mycontroller = Get.put(authViewModel()) ; 
+  var mycontroller = Get.put(AuthViewModel()) ; 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

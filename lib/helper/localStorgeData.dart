@@ -3,46 +3,43 @@ import 'dart:convert';
 
 import 'package:corsatech_app/core/model/user_Model.dart';
 import 'package:corsatech_app/helper/constance.dart';
-import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorgageData extends GetxController {
 
-  
- Future<UserModel?> get  getUserData async  {
-   try { 
-   UserModel userModel = await  _getUserData() ; 
-   if(userModel == null ) {
-    return  null ; 
-   }  
-   return userModel ; 
+   
 
-   }catch (e) {
+  Future<UserModel?> get getUser async {
+    try {
+    UserModel userModel = await _getUserData() ; 
+    if(userModel == null ) {
+     return null ; 
+    }
+    return userModel ; 
+    }catch(e) {
     print(e.toString()) ; 
-   }
+    }
+  
+  }
+
+  _getUserData () async {
+  SharedPreferences sharedPrefs = await SharedPreferences.getInstance() ; 
+  var value =  sharedPrefs.getString(CACHED_USER_DATA) ; 
+  return UserModel.fromJson(json.decode(value!)) ;
+   
  }
 
-_getUserData() async {
+ setUser (UserModel userModel) async {
+  SharedPreferences sharedPrefs = await SharedPreferences.getInstance() ;
+  sharedPrefs.setString(CACHED_USER_DATA, json.encode(userModel.toJson())) ;
 
- SharedPreferences sharedPreferences = await SharedPreferences.getInstance() ; 
- var value =  sharedPreferences.getString(CACHED_USER_DATA) ; 
- return UserModel.fromJson(json.decode(value!)) ; 
+ }
 
+ deleteUser () async {
+      SharedPreferences sharedPrefs = await SharedPreferences.getInstance() ; 
+      await sharedPrefs.clear() ; 
 
-}
-
-setUserData (UserModel userModel) async {
- SharedPreferences sharedPreferences = await SharedPreferences.getInstance() ;      
- sharedPreferences.setString(CACHED_USER_DATA, json.encode(
-   UserModel( 
-   email: userModel.email!   ,
-   name: userModel.name!     , 
-   userId: userModel.userId! , 
-   ).toJson() 
- )) ; 
-}
-
-
-
-
+ }
 }

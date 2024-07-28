@@ -52,6 +52,7 @@ class categoryView extends StatelessWidget {
         
         
           child: Column(
+            
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end ,
@@ -59,19 +60,19 @@ class categoryView extends StatelessWidget {
                       Column(
                       crossAxisAlignment: CrossAxisAlignment.end,  
                       children: [
-                      Text("${categoryCourse[i].title}" ) , 
-                      SizedBox(width: 5 ,) , 
-                      Text("${InstructorCourse[i].name}") , 
-                      
-                       
-                      ],
+                      Container(
+                        width: 230 ,
+                        child: Text("${categoryCourse[i].title}" , style: TextStyle(fontWeight: FontWeight.w700),)) , 
+                      SizedBox(height: 10 ,) , 
+                      Text("${InstructorCourse[i].name}") ,  
+                      ] ,
                       ) , 
                       SizedBox(width: 20 ,) , 
                       
                       GestureDetector(
               onTap: () {
                 Get.to(() => detailsView(coursemodel: categoryCourse[i] , instructorModel: InstructorCourse[i],)) ; 
-              },
+              } ,
               child: Container(
                height: 100 ,
                 width: 100 ,

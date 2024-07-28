@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:corsatech_app/core/view/controller_View.dart';
 import 'package:corsatech_app/core/view/pages/home_View.dart';
+import 'package:corsatech_app/core/view/pages/splashPages/welcom_View.dart';
 import 'package:corsatech_app/helper/myBindings.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,6 +28,7 @@ void main() async {
     )
     ) 
   :await Firebase.initializeApp() ;
+  // runApp(MyApp());
   runApp(DevicePreview(builder: (context)=> MyApp()));
   // runApp(const MyApp())           ;
 }
@@ -58,9 +60,7 @@ class MyApp extends StatelessWidget {
       ),
       initialBinding: myBindings(), 
       home: 
-      Directionality(
-        textDirection: TextDirection.rtl,
-        child: ControllerView()) 
+      welcomView() , 
     );
   }
 }

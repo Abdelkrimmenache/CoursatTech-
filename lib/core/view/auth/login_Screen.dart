@@ -23,8 +23,8 @@ class loginScreen extends StatelessWidget {
         
       ),
       body: 
-          GetBuilder<authViewModel>(
-          init: authViewModel(), 
+          GetBuilder<AuthViewModel>(
+          init: AuthViewModel(), 
           builder: (controller) => 
           Form(
           key: _formstate,

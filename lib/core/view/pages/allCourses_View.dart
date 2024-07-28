@@ -42,13 +42,18 @@ class allCourses extends StatelessWidget {
                       Column(
                       crossAxisAlignment: CrossAxisAlignment.end,  
                       children: [
-                      Text("${controller.courseModel[i].title}"  ,), 
-                      SizedBox(width: 5 ,) , 
+                      Container(
+                        
+                        width: Get.mediaQuery.size.width * 0.55,  
+                        child: Text("${controller.courseModel[i].title}",
+                        style: TextStyle(fontWeight: FontWeight.w900 ),
+                        )), 
+                      SizedBox(height: 10,) , 
                       Text("${(controller.instructorModel[i].instructorId == controller.courseModel[i].instructorId) ?
                             controller.instructorModel[i].name: "not defined"}") , 
-                      SizedBox(width: 5 ,) , 
+                      SizedBox(height: 5 ,) , 
                       Text("${controller.courseModel[i].catergory}") , 
-              ],
+                      ],
                       ) , 
                       SizedBox(width: 20,) , 
                       
@@ -57,13 +62,16 @@ class allCourses extends StatelessWidget {
                 Get.to(() => detailsView(coursemodel: controller.courseModel[i] , instructorModel: controller.instructorModel[i],)) ; 
               },
               child: Container(
-               height: 100 ,
-                width: 100 ,
+                height: 100 ,
+                width: Get.mediaQuery.size.width * 0.30 , 
                 decoration: BoxDecoration(
                   border: Border.all(color: Get.theme.primaryColor),
                    color: const Color.fromARGB(255, 0, 0, 0) ,
                    borderRadius: BorderRadius.circular(20 ) , 
-                   image: DecorationImage(image: NetworkImage("${controller.courseModel[i].picOfCourse}" ) , 
+                   image: DecorationImage(image: 
+                   NetworkImage("${controller.courseModel[i].picOfCourse}" , 
+                    
+                    ) , 
                    
                    
                   

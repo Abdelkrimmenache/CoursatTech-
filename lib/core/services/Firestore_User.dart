@@ -7,14 +7,15 @@ import 'package:corsatech_app/core/model/user_Model.dart';
 
 class FirestoreUser {
  
- CollectionReference _userCollectionReference = FirebaseFirestore.instance.collection("User") ;
+ CollectionReference _userCollectionRef = FirebaseFirestore.instance.collection("user") ; 
 
-  Future<void> addUserToFirestore(UserModel userModel)async {
-  await _userCollectionReference.doc(userModel.userId).set(userModel.toJson()) ;
+ Future<void> addUserToFirestore (UserModel userModel) async {
+  await  _userCollectionRef.doc(userModel.userId).set(userModel.toJson()) ; 
  }
 
- Future<DocumentSnapshot> getCurrentUser (String uid) async {
-  return await _userCollectionReference.doc(uid).get() ; 
- }
+   Future<DocumentSnapshot> getCurrentUser(String uId) async {
+     return await _userCollectionRef.doc(uId).get() ;  
+
+  }
 
 }

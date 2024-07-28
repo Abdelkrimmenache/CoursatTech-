@@ -7,6 +7,7 @@ import 'package:corsatech_app/core/view/UI_components/searchBar.dart';
 import 'package:corsatech_app/core/view/pages/allCourses_View.dart';
 import 'package:corsatech_app/core/view/pages/category_View.dart';
 import 'package:corsatech_app/core/view/pages/personal_Screen.dart';
+import 'package:corsatech_app/core/view/pages/search/customSerachDelegate.dart';
 import 'package:corsatech_app/core/viewModel/home_ViewMedel.dart';
 
 import 'package:flutter/material.dart';
@@ -32,16 +33,17 @@ class HomeView extends StatelessWidget {
        ),)
        :
        Scaffold(
-      //   appBar: AppBar(
+        appBar: AppBar(
         
-      //   backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 214, 214, 214),
           
-      //   title: Center(child: Text("corsatech" , style: TextStyle(color: Colors.white),) ) , 
-      //   leading: IconButton(onPressed: () {
-        
-      //   },
-      //    icon: Icon(Icons.search)),
-      // ),
+       
+        leading: IconButton(
+          onPressed: () {
+        showSearch(context: context, delegate: CustomSerach()) ;  
+        },
+         icon: Icon(Icons.search)),
+      ),
        
         body:
         Padding(
@@ -50,9 +52,7 @@ class HomeView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 30 ,) , 
-                searchBar(controller: searchController ) , 
-                  SizedBox(height: 30 ,) , 
+               
                 Container(
                   
                   child: Row(

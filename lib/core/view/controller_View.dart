@@ -16,7 +16,7 @@ class ControllerView extends StatelessWidget{
    ControllerView({super.key});
    
    var controller = Get.put(controllerViewModel())  ; 
-   var mycontroller = Get.put(authViewModel()) ; 
+   var mycontroller = Get.put(AuthViewModel()) ; 
   
 
   @override
